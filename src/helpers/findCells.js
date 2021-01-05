@@ -5,8 +5,10 @@ export const questions = {
         { num: 10, question: "Actress famous for playing Katniss Everdeen in the Hunger Games films, also 30 across" },
         { num: 11, question: "Not on time" },
         { num: 13, question: "A poem should always --" },
-        { num: 14, question: "A level paved area next to a building" },
+        { num: 15, question: "A level paved area next to a building" },
+        { num: 17, question: "Proper nativity stuff, a word you sadly never hear any more" },
         { num: 18, question: "Cranky granny character invented by Jonathan Winters" },
+        { num: 22, question: "-- Murray, pub landlord" },
         { num: 23, question: "Not wet any more because it --" },
         { num: 26, question: "Mr -- was always causing chaos" },
         { num: 28, question: "Put a babby in it" },
@@ -37,7 +39,6 @@ export const questions = {
         { num: 29, question: "Binary Coded Decimal" },
         { num: 31, question: "Hippy crack" },
         { num: 33, question: "Creators of the Beanie Baby" },
-
     ],
     board: "m.peterotoolea.a.w.h.dim.ljennifer.lateo...n.t.c.h.mrhyme.terrace..o....lo...nmaudefrickerto...al....g..driedup.magooi.l.s.l.e...pcrib.lawrenceu.act.z.g.o.rmuddywaters.a",
 };
