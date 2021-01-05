@@ -2,7 +2,17 @@
 import { useState } from 'react';
 import './App.css';
 
+import {
+  questions,
+  moveCellDown,
+  moveCellRight,
+  getCell,
+  // getIndex,
+  cellFilled,
+  cellEmpty
+} from "./helpers/findCells.js";
 import Cell from "./Cell.js";
+import Questions from "./Questions.js";
 
 function App() {
   const [direction, setDirection] = useState("across");
@@ -14,62 +24,71 @@ function App() {
   const gy = parseInt(size.split("x")[1]);
   const board = gameString.split(":")[1];
   console.log(board);
-  let bx = 0;
-  let by = 0;
 
-  let game = [];
-  let index = 1;
+  const changeCell = (x, y) => {
+    if (direction === "across") {
+      moveCellRight(x, y);
+    } else {
+      moveCellDown(x, y);
+    }
+  }
 
-  for (by = 0; by < gy; by++) {
-    for (bx = 0; bx < gx; bx++) {
-      const cell = getCell(bx, by);
-      // console.log(cell)
-      let number;
-      let left = getCell(bx - 1, by);
-      let right = getCell(bx + 1, by);
-      let above = getCell(bx, by - 1);
-      let below = getCell(bx, by + 1);
 
-      if (
-        cell !== "." &&
-        (
-          (cellEmpty(left) && cellFilled(right)) ||
-          (cellEmpty(above) && cellFilled(below))
+  const createGrid = () => {
+
+    let bx = 0;
+    let by = 0;
+
+    let game = [];
+    let index = 1;
+
+    for (by = 0; by < gy; by++) {
+      for (bx = 0; bx < gx; bx++) {
+        const cell = getCell(bx, by);
+        // console.log(cell)
+        let number, direction;
+        let left = getCell(bx - 1, by);
+        let right = getCell(bx + 1, by);
+        let above = getCell(bx, by - 1);
+        let below = getCell(bx, by + 1);
+
+        if (
+          cell !== "." &&
+          (
+            (cellEmpty(left) && cellFilled(right)) ||
+            (cellEmpty(above) && cellFilled(below))
+          )
+        ) {
+          number = index;
+          index++;
+          if (cellEmpty(left) && cellFilled(right)) {
+            direction = "across";
+          } else {
+            direction = "down";
+          }
+        }
+        game.push(
+          <Cell
+            value={cell}
+            number={number}
+            direction={direction}
+            setDirection={setDirection}
+            key={(gx * by) + bx}
+            index={(gx * by) + bx}
+            handler={changeCell}
+          />
         )
-      ) {
-        number = index;
-        index++;
       }
-      game.push(
-        <Cell value={cell} number={number} key={((gx * by) + bx).toString()} />
-      )
     }
+    return game;
   }
-
-  function getCell(x, y) {
-    if (x >= gx || y >= gy || x < 0 || y < 0) {
-      return undefined;
-    }
-    return board[(gx * y) + x];
-  }
-
-  function cellFilled(val) {
-    return val === undefined ? false : val.match(/[a-zA-Z]/) !== null;
-  }
-  function cellEmpty(val) {
-    return val === "." || val === undefined;
-  }
-
-  const moveToCell = () => {
-
-  }
-
 
   return (
     <div className="App">
       <div id="grid">
-        {game}
+        {createGrid()}
       </div>
+      <Questions questions={questions} />
 
     </div>
   );
