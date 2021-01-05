@@ -7,7 +7,7 @@ import {
   moveCellDown,
   moveCellRight,
   getCell,
-  // getIndex,
+  getIndex,
   cellFilled,
   cellEmpty
 } from "./helpers/findCells.js";
@@ -33,6 +33,8 @@ function App() {
     }
   }
 
+  let qStarts = {};
+
 
   const createGrid = () => {
 
@@ -42,11 +44,13 @@ function App() {
     let game = [];
     let index = 1;
 
+    let direction = "across";
+
     for (by = 0; by < gy; by++) {
       for (bx = 0; bx < gx; bx++) {
         const cell = getCell(bx, by);
         // console.log(cell)
-        let number, direction;
+        let number;
         let left = getCell(bx - 1, by);
         let right = getCell(bx + 1, by);
         let above = getCell(bx, by - 1);
@@ -61,11 +65,12 @@ function App() {
         ) {
           number = index;
           index++;
-          if (cellEmpty(left) && cellFilled(right)) {
-            direction = "across";
-          } else {
-            direction = "down";
-          }
+          qStarts[number] = getIndex(bx, by);
+        }
+        if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
+          direction = "across";
+        } else {
+          direction = "down";
         }
         game.push(
           <Cell
@@ -88,7 +93,7 @@ function App() {
       <div id="grid">
         {createGrid()}
       </div>
-      <Questions questions={questions} />
+      <Questions questions={questions} setDirection={setDirection} starts={qStarts} />
 
     </div>
   );

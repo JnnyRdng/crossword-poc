@@ -15,7 +15,7 @@ export default function Cell({ number, value, index, handler, direction, setDire
 
   const handleInput = (evt) => {
     evt.target.value = evt.target.value.slice(-1);
-    console.log(evt.target.value);
+    // console.log(evt.target.value);
 
     const x = index % 13;
     const y = (index - x) / 13;
@@ -36,7 +36,7 @@ export default function Cell({ number, value, index, handler, direction, setDire
       </div>
       {value !== "." &&
         // <div className="char">{ }</div>
-        <input id={"cell_" + index} onClick={handleClick} onInput={(event) => handleInput(event)} maxLength={2} type="text" className="char" defaultValue={value} />
+        <input id={"cell_" + index} onClick={handleClick} onInput={(event) => handleInput(event)} maxLength={2} type="text" className="char"/*  defaultValue={value} */ />
       }
     </div>
   )
