@@ -72,6 +72,9 @@ function App() {
         } else {
           direction = "down";
         }
+        if (cellEmpty(above) && cellFilled(below)) {
+          direction = "down";
+        }
         game.push(
           <Cell
             value={cell}
@@ -90,11 +93,12 @@ function App() {
 
   return (
     <div className="App">
-      <div id="grid">
-        {createGrid()}
+      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+        <div id="grid" style={{ width: 50 * gx }}>
+          {createGrid()}
+        </div>
+        <Questions questions={questions} setDirection={setDirection} starts={qStarts} />
       </div>
-      <Questions questions={questions} setDirection={setDirection} starts={qStarts} />
-
     </div>
   );
 }

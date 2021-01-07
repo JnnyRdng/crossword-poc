@@ -16,7 +16,7 @@ export default function Questions({ questions, setDirection, starts }) {
 
         }
         return (
-            <div onClick={() => handleClick()}>
+            <div onClick={() => handleClick()} style={{ marginTop: 4, textAlign: "start" }}>
                 <span><span style={{ fontWeight: "bold" }}>{q.num}. </span>{q.question}</span>
             </div>
         );
@@ -26,7 +26,7 @@ export default function Questions({ questions, setDirection, starts }) {
     const down = questions.down.sort((a, b) => a.num - b.num).map(q => <Question q={q} key={q.question} dir="down" />);
 
     return (
-        <div>
+        <div style={{ height: 50 * 13, width: 300, overflowX: "scroll", overflowY: "none", padding: 10 }}>
             <h3>Across</h3>
             {across}
             <h3>Down</h3>
