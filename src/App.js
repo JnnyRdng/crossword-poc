@@ -1,106 +1,47 @@
+import { useState } from "react";
 
-import { useState } from 'react';
-import './App.css';
+import { questions, config } from "./helpers/data";
+import Game from "./Components/Game";
+import CreateGrid from "./Components/Builder/CreateGrid";
+import Toast from "./Components/Builder/Toast";
 
-import {
-  questions,
-  moveCellDown,
-  moveCellRight,
-  getCell,
-  getIndex,
-  cellFilled,
-  cellEmpty
-} from "./helpers/findCells.js";
-import Cell from "./Cell.js";
-import Questions from "./Questions.js";
+export default function App() {
+    const [popup, setPopup] = useState(false);
+    const [demo, setDemo] = useState(true);
+    const [game, setGame] = useState(config.board);
+    const [qs, setQs] = useState(questions);
+    const [dimensions, setDimensions] = useState(config.dimensions);
 
-function App() {
-  const [direction, setDirection] = useState("across");
-
-  // const gameString = "13x13:assist.amazoni.c.i...pro.aroaddog.vroom..l.e..s....ipressure.carb...e...n.o..ibipartisan.cao.r..o.o.est.xpo.infra.towe.g.n.l.rio.estructure.pst.ia.u.ion.g..rpm.radiator.";
-  const gameString = "13x13:m.peterotoolea.a.w.h.dim.ljennifer.lateo...n.t.c.h.mrhyme.terrace..o....lo...nmaudefrickerto...al....g..driedup.magooi.l.s.l.e...pcrib.lawrenceu.act.z.g.o.rmuddywaters.a";
-  const size = gameString.split(":")[0];
-  const gx = parseInt(size.split("x")[0]);
-  const gy = parseInt(size.split("x")[1]);
-  const board = gameString.split(":")[1];
-  console.log(board);
-
-  const changeCell = (x, y) => {
-    if (direction === "across") {
-      moveCellRight(x, y);
-    } else {
-      moveCellDown(x, y);
+    const defaultBoard = () => {
+        setDemo(true);
+        setGame(config.board);
+        setQs(questions);
+        setDimensions(config.dimensions);
     }
-  }
 
-  let qStarts = {};
-
-
-  const createGrid = () => {
-
-    let bx = 0;
-    let by = 0;
-
-    let game = [];
-    let index = 1;
-
-    let direction = "across";
-
-    for (by = 0; by < gy; by++) {
-      for (bx = 0; bx < gx; bx++) {
-        const cell = getCell(bx, by);
-        // console.log(cell)
-        let number;
-        let left = getCell(bx - 1, by);
-        let right = getCell(bx + 1, by);
-        let above = getCell(bx, by - 1);
-        let below = getCell(bx, by + 1);
-
-        if (
-          cell !== "." &&
-          (
-            (cellEmpty(left) && cellFilled(right)) ||
-            (cellEmpty(above) && cellFilled(below))
-          )
-        ) {
-          number = index;
-          index++;
-          qStarts[number] = getIndex(bx, by);
-        }
-        if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
-          direction = "across";
+    const clearBoard = () => {
+        if (!demo) {
+            defaultBoard();
         } else {
-          direction = "down";
+            setDemo(false);
+            setGame("");
+            setQs({ across: [], down: [] });
+            setDimensions({ width: 1, height: 1 });
         }
-        if (cellEmpty(above) && cellFilled(below)) {
-          direction = "down";
-        }
-        game.push(
-          <Cell
-            value={cell}
-            number={number}
-            direction={direction}
-            setDirection={setDirection}
-            key={(gx * by) + bx}
-            index={(gx * by) + bx}
-            handler={changeCell}
-          />
-        )
-      }
     }
-    return game;
-  }
 
-  return (
-    <div className="App">
-      <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-        <div id="grid" style={{ width: 50 * gx }}>
-          {createGrid()}
-        </div>
-        <Questions questions={questions} setDirection={setDirection} starts={qStarts} />
-      </div>
-    </div>
-  );
+    return (
+        <>
+            <button onClick={() => clearBoard()}>click me</button>
+            
+            {
+                !demo &&
+                <CreateGrid setGame={setGame} setQs={setQs} setDimensions={setDimensions} />
+            }
+            <Game questions={qs} board={game} dimensions={dimensions} />
+            { popup &&
+                <Toast />
+            }
+        </>
+    )
 }
-
-export default App;

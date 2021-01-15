@@ -1,21 +1,21 @@
-.App {
+.Game {
   text-align: center;
   /* background-color: #1C1E26; */
   height: 100vh;
 }
 
-.App-logo {
+.Game-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .Game-logo {
+    animation: Game-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
+.Game-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -26,11 +26,11 @@
   color: white;
 }
 
-.App-link {
+.Game-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+@keyframes Game-logo-spin {
   from {
     transform: rotate(0deg);
   }
