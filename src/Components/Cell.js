@@ -9,7 +9,7 @@ import "./Cell.css";
 //   cellEmpty
 // } from "./helpers/findCells.js";
 
-export default function Cell({ number, value, index, handler, direction, setDirection }) {
+export default function Cell({ number, value, index, handler, direction, setDirection, dimensions }) {
 
   const style = value === "." ? "black" : "white";
 
@@ -17,8 +17,8 @@ export default function Cell({ number, value, index, handler, direction, setDire
     evt.target.value = evt.target.value.slice(-1);
     // console.log(evt.target.value);
 
-    const x = index % 13;
-    const y = (index - x) / 13;
+    const x = index % dimensions.width;
+    const y = (index - x) / dimensions.height;
     handler(x, y);
   }
 
@@ -35,15 +35,14 @@ export default function Cell({ number, value, index, handler, direction, setDire
         {number}
       </div>
       {value !== "." &&
-        // <div className="char">{ }</div>
         <input
           id={"cell_" + index}
           onClick={handleClick}
-          onInput={(event) => handleInput(event)}
+        onInput={handleInput}
           maxLength={2}
           type="text"
           className="char"
-          value={value}
+        defaultValue={value}
         />
       }
     </div>

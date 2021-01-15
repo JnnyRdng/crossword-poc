@@ -1,4 +1,4 @@
-export default function Questions({ questions, setDirection, starts }) {
+export default function Questions({ questions, setDirection, starts, dimensions }) {
 
     // console.log("num of qs across", questions.across.length)
     // console.log("num of qs down", questions.down.length)
@@ -6,15 +6,11 @@ export default function Questions({ questions, setDirection, starts }) {
     function Question({ q, dir }) {
 
         const handleClick = () => {
-            // console.log(q.question)
-            if (dir === "across") {
-                setDirection("across");
-            } else {
-                setDirection("down");
-            }
-            document.getElementById(`cell_${starts[q.num]}`).focus();
-
+            const qStart = starts[q.num];
+            setDirection(qStart.direction);
+            document.getElementById(`cell_${qStart.index}`).focus();
         }
+
         return (
             <div onClick={() => handleClick()} style={{ marginTop: 4, textAlign: "start" }}>
                 <span><span style={{ fontWeight: "bold" }}>{q.num}. </span>{q.question}</span>
@@ -26,7 +22,7 @@ export default function Questions({ questions, setDirection, starts }) {
     const down = questions.down.sort((a, b) => a.num - b.num).map(q => <Question q={q} key={q.question} dir="down" />);
 
     return (
-        <div style={{ height: 50 * 13, width: 300, overflowX: "scroll", overflowY: "none", padding: 10 }}>
+        <div style={{ height: 50 * dimensions.height, width: 300, overflowX: "hidden", overflowY: "auto", padding: 10 }}>
             <h3>Across</h3>
             {across}
             <h3>Down</h3>

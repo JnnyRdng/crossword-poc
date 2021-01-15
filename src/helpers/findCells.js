@@ -1,15 +1,15 @@
 
-export const moveCellDown = (x, y, dimensions) => {
+export const moveCellDown = (x, y, board, dimensions) => {
     const newIndex = getIndex(x, y + 1, dimensions.width);
-    const nextCell = getCell(x, y + 1);
+    const nextCell = getCell(x, y + 1, board, dimensions);
     if (cellFilled(nextCell)) {
         document.getElementById(`cell_${newIndex}`).focus();
     }
 }
 
-export const moveCellRight = (x, y, dimensions) => {
+export const moveCellRight = (x, y, board, dimensions) => {
     const newIndex = getIndex(x + 1, y, dimensions.width);
-    const nextCell = getCell(x + 1, y);
+    const nextCell = getCell(x + 1, y, board, dimensions);
     if (cellFilled(nextCell)) {
         document.getElementById(`cell_${newIndex}`).focus();
     }

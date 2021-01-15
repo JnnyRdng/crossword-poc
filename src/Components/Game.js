@@ -28,9 +28,9 @@ export default function Game({ questions, board, dimensions }) {
 
   const changeCell = (x, y) => {
     if (direction === "across") {
-      moveCellRight(x, y, dimensions.width);
+      moveCellRight(x, y, board, dimensions.width);
     } else {
-      moveCellDown(x, y, dimensions.width);
+      moveCellDown(x, y, board, dimensions.width);
     }
   }
 
@@ -57,6 +57,11 @@ export default function Game({ questions, board, dimensions }) {
         let above = getCell(bx, by - 1, board, dimensions);
         let below = getCell(bx, by + 1, board, dimensions);
 
+        if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
+          direction = "across";
+        } else {
+          direction = "down";
+        }
         if (
           cell !== "." &&
           (
@@ -66,16 +71,14 @@ export default function Game({ questions, board, dimensions }) {
         ) {
           number = index;
           index++;
-          qStarts[number] = getIndex(bx, by, dimensions.width);
+          qStarts[number] = {
+            index: getIndex(bx, by, dimensions.width),
+            direction: direction
+          };
         }
-        if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
-          direction = "across";
-        } else {
-          direction = "down";
-        }
-        if (cellEmpty(above) && cellFilled(below)) {
-          direction = "down";
-        }
+        // if (cellEmpty(above) && cellFilled(below)) {
+        //   direction = "down";
+        // }
         game.push(
           <Cell
             value={cell}
@@ -85,6 +88,7 @@ export default function Game({ questions, board, dimensions }) {
             key={(gx * by) + bx}
             index={(gx * by) + bx}
             handler={changeCell}
+            dimensions={dimensions}
           />
         )
       }
@@ -98,7 +102,12 @@ export default function Game({ questions, board, dimensions }) {
         <div id="grid" style={{ width: 50 * gx }}>
           {createGrid()}
         </div>
-        <Questions questions={questions} setDirection={setDirection} starts={qStarts} />
+        <Questions
+          questions={questions}
+          setDirection={setDirection}
+          starts={qStarts}
+          dimensions={dimensions}
+        />
       </div>
     </div>
   );
