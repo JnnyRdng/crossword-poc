@@ -14,17 +14,13 @@ import {
 import Cell from "./Cell.js";
 import Questions from "./Questions.js";
 
-export default function Game({ questions, board, dimensions }) {
+export default function Game({ questions, board, dimensions, qMap, setQMap }) {
+
   const [direction, setDirection] = useState("across");
 
-
-  // const size = gameString.split(":")[0];
-  // const gx = parseInt(size.split("x")[0]);
-  // const gy = parseInt(size.split("x")[1]);
-  // const board = gameString.split(":")[1];
   const gx = dimensions.width;
   const gy = dimensions.height;
-  console.log(board);
+  // console.log(board);
 
   const changeCell = (x, y) => {
     if (direction === "across") {
@@ -34,9 +30,6 @@ export default function Game({ questions, board, dimensions }) {
     }
   }
 
-  let qStarts = {};
-
-
   const createGrid = () => {
 
     let bx = 0;
@@ -44,6 +37,8 @@ export default function Game({ questions, board, dimensions }) {
 
     let game = [];
     let index = 1;
+
+    let newQMap = {};
 
     let direction = "across";
 
@@ -69,11 +64,19 @@ export default function Game({ questions, board, dimensions }) {
             (cellEmpty(above) && cellFilled(below))
           )
         ) {
+          let wordDir = "";
+          if ((cellEmpty(left) && cellEmpty(above)) && (cellFilled(right) && cellFilled(below))) {
+            wordDir = "both";
+          } else if (cellEmpty(left) && cellFilled(right)) {
+            wordDir = "across";
+          } else if (cellEmpty(above) && cellFilled(below)) {
+            wordDir = "down";
+          }
           number = index;
           index++;
-          qStarts[number] = {
+          newQMap[number] = {
             index: getIndex(bx, by, dimensions.width),
-            direction: direction
+            direction: wordDir,
           };
         }
         // if (cellEmpty(above) && cellFilled(below)) {
@@ -90,8 +93,11 @@ export default function Game({ questions, board, dimensions }) {
             handler={changeCell}
             dimensions={dimensions}
           />
-        )
+        );
       }
+    }
+    if (JSON.stringify(qMap) !== JSON.stringify(newQMap)) {
+      setQMap(newQMap);
     }
     return game;
   }
@@ -102,12 +108,15 @@ export default function Game({ questions, board, dimensions }) {
         <div id="grid" style={{ width: 50 * gx }}>
           {createGrid()}
         </div>
-        <Questions
-          questions={questions}
-          setDirection={setDirection}
-          starts={qStarts}
-          dimensions={dimensions}
-        />
+        {Object.keys(qMap).length > 0 &&
+          <Questions
+            questions={questions}
+            setDirection={setDirection}
+            starts={qMap}
+            dimensions={dimensions}
+            board={board}
+          />
+        }
       </div>
     </div>
   );

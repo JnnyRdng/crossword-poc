@@ -1,3 +1,27 @@
 .create-grid {
-    height: 400
+    /* height: 400px; */
+    width: 90%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.input-text {
+    margin: 10px;
+}
+
+#dimension-inputs {
+    display: flex;
+}
+
+#game_grid {
+    width: calc(100vw - 80px);
+}
+
+input {
+    height: 2rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: 700;
 }

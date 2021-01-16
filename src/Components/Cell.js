@@ -1,13 +1,14 @@
 import "./Cell.css";
 
-// import {
-//   moveCellDown,
-//   moveCellRight,
-//   getCell,
-//   getIndex,
-//   cellFilled,
-//   cellEmpty
-// } from "./helpers/findCells.js";
+import {
+  // moveCellDown,
+  // moveCellRight,
+  // getCell,
+  // getIndex,
+  // cellFilled,
+  // cellEmpty,
+  getCoords,
+} from "../helpers/findCells.js";
 
 export default function Cell({ number, value, index, handler, direction, setDirection, dimensions }) {
 
@@ -15,11 +16,8 @@ export default function Cell({ number, value, index, handler, direction, setDire
 
   const handleInput = (evt) => {
     evt.target.value = evt.target.value.slice(-1);
-    // console.log(evt.target.value);
-
-    const x = index % dimensions.width;
-    const y = (index - x) / dimensions.height;
-    handler(x, y);
+    const coords = getCoords(index, dimensions);
+    handler(coords.x, coords.y);
   }
 
   const handleClick = () => {
@@ -30,20 +28,24 @@ export default function Cell({ number, value, index, handler, direction, setDire
   }
 
   return (
-    <div className={`${"cell"} ${style}`}>
-      <div className="label">
-        {number}
-      </div>
+    <div className={`${"cell"} ${style}`} key={`cell_outer_${index}`}>
       {value !== "." &&
-        <input
-          id={"cell_" + index}
-          onClick={handleClick}
-        onInput={handleInput}
-          maxLength={2}
-          type="text"
-          className="char"
-        defaultValue={value}
-        />
+        <>
+          <div className="label">
+            {number}
+          </div>
+          <input
+            id={"cell_" + index}
+            onClick={handleClick}
+            onInput={handleInput}
+            maxLength={2}
+            type="text"
+            className="char"
+            // defaultValue={value ? value : " "}
+            value={value ? value : " "}
+            key={`cell_input_${index}`}
+          />
+        </>
       }
     </div>
   )
