@@ -1,0 +1,30 @@
+.shown {
+  background-color: lightblue;
+}
+
+.not-shown {
+  background-color: rgb(231, 231, 231);
+}
+
+.question {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  cursor: pointer;
+  margin-top: 4px;
+  padding: 4px;
+  text-align: start;
+  border-radius: 4px;
+}
+
+.question:active {
+  background-color: rgb(141, 178, 190);
+}
+
+.question-number {
+  font-weight: "bold";
+}
+
+.question-text {
+  margin: 4px;
+}
