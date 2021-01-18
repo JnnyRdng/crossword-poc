@@ -103,7 +103,7 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
   }
 
   return (
-    <div className="App">
+    <div className="Game">
       <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         <div id="grid" style={{ width: 50 * gx }}>
           {createGrid()}
@@ -113,6 +113,7 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
             questions={questions}
             setDirection={setDirection}
             starts={qMap}
+          setQMap={setQMap}
             dimensions={dimensions}
             board={board}
           />

@@ -31,16 +31,17 @@ export default function Cell({ number, value, index, handler, direction, setDire
     <div className={`${"cell"} ${style}`} key={`cell_outer_${index}`}>
       {value !== "." &&
         <>
+          <div className="cell-colour"></div>
           <div className="label">
             {number}
           </div>
           <input
             id={"cell_" + index}
+            className="char"
             onClick={handleClick}
             onInput={handleInput}
             maxLength={2}
             type="text"
-            className="char"
             // defaultValue={value ? value : " "}
             value={value ? value : " "}
             key={`cell_input_${index}`}

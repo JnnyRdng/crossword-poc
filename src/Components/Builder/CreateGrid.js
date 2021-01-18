@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { config } from "../../helpers/data";
 import "./CreateGrid.css";
 // import Toast from "./Toast";
 
@@ -9,6 +10,7 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
   const [width, setWidth] = useState(9);
   const [height, setHeight] = useState(9);
   const [string, setString] = useState("hello...te.e.rhymelow.i.e.tl.dig.s.ro...in..i.grin.has.a.o..o...m.nasty.gems.o.of")
+  const [showQBuilder, setShowQBuilder] = useState(false);
 
   const questions = { across: [], down: [] };
 
@@ -39,6 +41,17 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
     const board = event.target.value;
     setGame(board);
     writeQuestions();
+    if (textArea.value.length === width * height) {
+      console.log("filled");
+      textArea.classList.remove("incomplete");
+      textArea.classList.add("complete");
+      setShowQBuilder(true);
+    } else {
+      textArea.classList.remove("complete");
+      textArea.classList.add("incomplete");
+      setShowQBuilder(false);
+    }
+    // console.log(textArea);
   }
   const updateDimensions = (event) => {
     const num = parseInt(event.target.value, 10);
@@ -50,12 +63,14 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
     }
   }
 
+  let textArea;
+
   return (
     <div className="create-grid">
       {warning && <p>{warning}</p>}
       <div id="dimension-inputs">
         <div className="input-text">
-          <label for="input_width">Width: </label> <br />
+          <label htmlFor="input_width">Width: </label> <br />
           <input
             id="input_width"
             type="number"
@@ -65,7 +80,7 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
           />
         </div>
         <div className="input-text">
-          <label for="input_height">Height: </label> <br />
+          <label htmlFor="input_height">Height: </label> <br />
           <input
             id="input_height"
             type="number"
@@ -76,17 +91,33 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
         </div>
       </div>
       <div className="input-text">
-        <label for="game_grid">Crossword: </label> <br />
-        <input
+        <label htmlFor="game_grid">Crossword: </label> <br />
+        {/* <input
           id="game_grid"
-          type="text"
+          type="textarea"
           onInput={updateBoard}
           defaultValue={game}
           placeholder="Type a crossword"
-        />
+        /> */}
+        <textarea
+          ref={ref => textArea = ref}
+          id="game_grid"
+          className="incomplete"
+          onInput={updateBoard}
+          defaultValue={game}
+          placeholder="Type a crossword"
+          rows={height}
+          cols={width - 1}
+          maxLength={width * height}
+        ></textarea>
       </div>
       <div>
-        <button onClick={writeQuestions}>Write questions</button>
+        {showQBuilder && (
+          // <button onClick={writeQuestions}>Write questions</button>
+          <>
+
+          </>
+        )}
 
       </div>
     </div>

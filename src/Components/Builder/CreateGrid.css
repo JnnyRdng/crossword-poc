@@ -16,7 +16,12 @@
 }
 
 #game_grid {
-    width: calc(100vw - 80px);
+    /* width: calc(100vw - 80px); */
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: large;
+    font-weight: 700;
+    resize: none;
 }
 
 input {
@@ -24,4 +29,12 @@ input {
     border-radius: 4px;
     font-family: monospace;
     font-weight: 700;
+}
+
+.incomplete {
+    background-color: rgb(253, 190, 200);
+}
+
+.complete {
+    background-color: rgb(188, 255, 188);
 }

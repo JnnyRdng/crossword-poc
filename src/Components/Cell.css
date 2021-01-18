@@ -13,6 +13,15 @@
     background-color: #FAFAFA;
 }
 
+.cell-colour {
+    height: 50px;
+    width: 50px;
+    margin: 0px;
+    padding: 0px;
+    z-index: 1;
+    position: absolute;
+}
+
 .label {
     display: relative;
     width: 15%;
@@ -26,16 +35,16 @@
 }
 
 .char {
-    z-index: 1;
+    z-index: 2;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 26px;
     font-weight: bold;
     text-transform: uppercase;
     position: relative;
     height: 100%;
-    width: 85%;
+    width: 95%;
     /* top: 20px; */
-    bottom: 2px;
+    bottom: 4px;
     right: 2px;
     text-align: center;
     margin: 0px;
@@ -43,4 +52,8 @@
     background-color: transparent;
     border: 0px solid transparent;
     outline: none;
+}
+
+.char:focus + .cell-colour {
+    background-color: lightgreen;
 }
