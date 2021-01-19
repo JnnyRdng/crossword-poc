@@ -22,7 +22,8 @@
 }
 
 .question-number {
-  font-weight: "bold";
+  font-weight: bold;
+  width: 30px;
 }
 
 .question-text {
