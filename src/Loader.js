@@ -11,7 +11,7 @@ export default function Loader() {
   }, []);
 
   const loadData = () => {
-    fetch("/crossword/myData.js")
+    fetch("/crossword/myData.json")
       .then(res => res.json())
       .then(res => {
         setConfig(res[0]);
