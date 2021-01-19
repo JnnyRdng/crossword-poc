@@ -14,7 +14,7 @@ import {
 import Cell from "./Cell.js";
 import Questions from "./Questions.js";
 
-export default function Game({ questions, board, dimensions, qMap, setQMap }) {
+export default function Game({ questions, board, dimensions, qMap, setQMap, demo }) {
 
   const [direction, setDirection] = useState("across");
 
@@ -24,9 +24,9 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
 
   const changeCell = (x, y) => {
     if (direction === "across") {
-      moveCellRight(x, y, board, dimensions.width);
+      moveCellRight(x, y, board, dimensions);
     } else {
-      moveCellDown(x, y, board, dimensions.width);
+      moveCellDown(x, y, board, dimensions);
     }
   }
 
@@ -40,7 +40,7 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
 
     let newQMap = {};
 
-    let direction = "across";
+    // let direction = "across";
 
     for (by = 0; by < gy; by++) {
       for (bx = 0; bx < gx; bx++) {
@@ -52,10 +52,18 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
         let above = getCell(bx, by - 1, board, dimensions);
         let below = getCell(bx, by + 1, board, dimensions);
 
-        if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
-          direction = "across";
-        } else {
-          direction = "down";
+        // if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
+        //   direction = "across";
+        // } else {
+        //   direction = "down";
+        // }
+        let wordDir = "";
+        if ((cellEmpty(left) && cellEmpty(above)) && (cellFilled(right) && cellFilled(below))) {
+          wordDir = "both";
+        } else if (cellEmpty(left) && cellFilled(right)) {
+          wordDir = "across";
+        } else if (cellEmpty(above) && cellFilled(below)) {
+          wordDir = "down";
         }
         if (
           cell !== "." &&
@@ -64,19 +72,13 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
             (cellEmpty(above) && cellFilled(below))
           )
         ) {
-          let wordDir = "";
-          if ((cellEmpty(left) && cellEmpty(above)) && (cellFilled(right) && cellFilled(below))) {
-            wordDir = "both";
-          } else if (cellEmpty(left) && cellFilled(right)) {
-            wordDir = "across";
-          } else if (cellEmpty(above) && cellFilled(below)) {
-            wordDir = "down";
-          }
+
           number = index;
           index++;
           newQMap[number] = {
             index: getIndex(bx, by, dimensions.width),
             direction: wordDir,
+            style: "not-shown"
           };
         }
         // if (cellEmpty(above) && cellFilled(below)) {
@@ -86,12 +88,14 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
           <Cell
             value={cell}
             number={number}
+            wordDir={wordDir}
             direction={direction}
             setDirection={setDirection}
             key={(gx * by) + bx}
             index={(gx * by) + bx}
             handler={changeCell}
             dimensions={dimensions}
+            demo={demo}
           />
         );
       }
@@ -113,7 +117,7 @@ export default function Game({ questions, board, dimensions, qMap, setQMap }) {
             questions={questions}
             setDirection={setDirection}
             starts={qMap}
-          setQMap={setQMap}
+            setQMap={setQMap}
             dimensions={dimensions}
             board={board}
           />

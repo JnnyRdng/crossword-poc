@@ -10,7 +10,7 @@ import {
   getCoords,
 } from "../helpers/findCells.js";
 
-export default function Cell({ number, value, index, handler, direction, setDirection, dimensions }) {
+export default function Cell({ number, value, index, handler, wordDir, direction, setDirection, dimensions, demo }) {
 
   const style = value === "." ? "black" : "white";
 
@@ -21,10 +21,15 @@ export default function Cell({ number, value, index, handler, direction, setDire
   }
 
   const handleClick = () => {
-    if (direction === undefined) {
+    if (wordDir === "both") {
+      if (direction === "across") {
+        setDirection("down");
+      } else {
+        setDirection("across");
+      }
       return;
     }
-    setDirection(direction);
+    setDirection(wordDir);
   }
 
   return (
@@ -42,8 +47,9 @@ export default function Cell({ number, value, index, handler, direction, setDire
             onInput={handleInput}
             maxLength={2}
             type="text"
-            // defaultValue={value ? value : " "}
-            value={value ? value : " "}
+            defaultValue={demo ? " " : undefined}
+            value={demo ? undefined : (value ? value : " ")}
+            // value={value ? value : " "}
             key={`cell_input_${index}`}
           />
         </>
