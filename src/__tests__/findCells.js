@@ -15,11 +15,20 @@ import {
 describe("Helper functions do the right things", () => {
 
   let x, y, board, dimensions;
+
   beforeEach(() => {
     x = 0;
     y = 0;
     board = "this.is.the.crossword.yay";
     dimensions = { width: 5, height: 5 };
+  });
+
+  test("sanity check", () => {
+    expect(x).toStrictEqual(0);
+    expect(y).toStrictEqual(0);
+    expect(board).toStrictEqual("this.is.the.crossword.yay");
+    expect(dimensions.width).toStrictEqual(5);
+    expect(dimensions.height).toStrictEqual(5);
   });
 
   test("first cell is 't'", () => {
