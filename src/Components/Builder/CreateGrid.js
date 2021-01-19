@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./CreateGrid.css";
 // import Toast from "./Toast";
 
-export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }) {
+export default function CreateGrid({ game, setGame, setQs, setDimensions }) {
 
   // const [popup, setPopup] = useState(true);
   const [warning, setWarning] = useState(undefined);
@@ -22,20 +22,20 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
 
 
   const writeQuestions = () => {
-    for (let key in qMap) {
-      // console.log(qMap[key])
-      const mapElement = {
-        num: key,
-        question: "",
-      };
-      if (qMap[key].direction !== "both") {
-        questions[qMap[key].direction].push(mapElement);
-      } else {
-        questions.across.push(mapElement);
-        questions.down.push(mapElement);
-      }
-    }
-    setQs(questions);
+    // for (let key in qMap) {
+    //   // console.log(qMap[key])
+    //   const mapElement = {
+    //     num: key,
+    //     question: "",
+    //   };
+    //   if (qMap[key].direction !== "both") {
+    //     questions[qMap[key].direction].push(mapElement);
+    //   } else {
+    //     questions.across.push(mapElement);
+    //     questions.down.push(mapElement);
+    //   }
+    // }
+    // setQs(questions);
   }
 
   const updateBoard = (event) => {

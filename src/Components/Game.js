@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Game.css';
 
 import {
@@ -14,13 +14,12 @@ import {
 import Cell from "./Cell.js";
 import Questions from "./Questions.js";
 
-export default function Game({ questions, board, dimensions, qMap, setQMap, demo }) {
+export default function Game({ questions, board, dimensions, demo }) {
 
   const [direction, setDirection] = useState("across");
 
   const gx = dimensions.width;
   const gy = dimensions.height;
-  // console.log(board);
 
   const changeCell = (x, y) => {
     if (direction === "across") {
@@ -38,25 +37,18 @@ export default function Game({ questions, board, dimensions, qMap, setQMap, demo
     let game = [];
     let index = 1;
 
-    let newQMap = {};
+    // let newQMap = {};
 
-    // let direction = "across";
 
     for (by = 0; by < gy; by++) {
       for (bx = 0; bx < gx; bx++) {
         const cell = getCell(bx, by, board, dimensions);
-        // console.log(cell)
         let number;
         let left = getCell(bx - 1, by, board, dimensions);
         let right = getCell(bx + 1, by, board, dimensions);
         let above = getCell(bx, by - 1, board, dimensions);
         let below = getCell(bx, by + 1, board, dimensions);
 
-        // if ((cellEmpty(left) && cellFilled(right)) || (cellFilled(left))) {
-        //   direction = "across";
-        // } else {
-        //   direction = "down";
-        // }
         let wordDir = "";
         if ((cellEmpty(left) && cellEmpty(above)) && (cellFilled(right) && cellFilled(below))) {
           wordDir = "both";
@@ -75,15 +67,14 @@ export default function Game({ questions, board, dimensions, qMap, setQMap, demo
 
           number = index;
           index++;
-          newQMap[number] = {
-            index: getIndex(bx, by, dimensions.width),
-            direction: wordDir,
-            style: "not-shown"
-          };
+          // newQMap[getIndex(bx, by, dimensions)] = {
+          //   number: number,
+          //   direction: wordDir,
+          //   style: "not-shown",
+          //   clicked: false,
+          // };
         }
-        // if (cellEmpty(above) && cellFilled(below)) {
-        //   direction = "down";
-        // }
+
         game.push(
           <Cell
             value={cell}
@@ -100,9 +91,6 @@ export default function Game({ questions, board, dimensions, qMap, setQMap, demo
         );
       }
     }
-    if (JSON.stringify(qMap) !== JSON.stringify(newQMap)) {
-      setQMap(newQMap);
-    }
     return game;
   }
 
@@ -112,12 +100,10 @@ export default function Game({ questions, board, dimensions, qMap, setQMap, demo
         <div id="grid" style={{ width: 50 * gx }}>
           {createGrid()}
         </div>
-        {Object.keys(qMap).length > 0 &&
+        {questions.length > 0 &&
           <Questions
             questions={questions}
             setDirection={setDirection}
-            starts={qMap}
-            setQMap={setQMap}
             dimensions={dimensions}
             board={board}
           />

@@ -9,14 +9,12 @@ export default function App({ config, questions }) {
   const [game, setGame] = useState(config.board);
   const [qs, setQs] = useState(questions);
   const [dimensions, setDimensions] = useState(config.dimensions);
-  const [qMap, setQMap] = useState({});
 
   const defaultBoard = () => {
     setDemo(true);
     setGame(config.board);
     setQs(questions);
     setDimensions(config.dimensions);
-    setQMap({});
   }
 
   const clearBoard = () => {
@@ -49,9 +47,9 @@ export default function App({ config, questions }) {
       <button onClick={download}>Export</button>
       {
         !demo &&
-        <CreateGrid game={game} setGame={setGame} setQs={setQs} setDimensions={setDimensions} qMap={qMap} />
+        <CreateGrid game={game} setGame={setGame} setQs={setQs} setDimensions={setDimensions} />
       }
-      <Game questions={qs} board={game} dimensions={dimensions} qMap={qMap} setQMap={setQMap} demo={demo} />
+      <Game questions={qs} board={game} dimensions={dimensions} demo={demo} />
 
     </>
   )
