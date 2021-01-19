@@ -24,9 +24,9 @@ export default function App({ config, questions }) {
       defaultBoard();
     } else {
       setDemo(false);
-      setGame(".");
-      setQs({ across: [], down: [] });
-      setDimensions({ width: 9, height: 9 });
+      // setGame(".");
+      // setQs({ across: [], down: [] });
+      // setDimensions({ width: 9, height: 9 });
     }
   }
   const download = () => {
@@ -51,7 +51,7 @@ export default function App({ config, questions }) {
         !demo &&
         <CreateGrid game={game} setGame={setGame} setQs={setQs} setDimensions={setDimensions} qMap={qMap} />
       }
-      <Game questions={qs} board={game} dimensions={dimensions} qMap={qMap} setQMap={setQMap} />
+      <Game questions={qs} board={game} dimensions={dimensions} qMap={qMap} setQMap={setQMap} demo={demo} />
 
     </>
   )
