@@ -1,20 +1,8 @@
-import { useState } from "react";
 import {
-  moveCellDown,
-  moveCellRight,
-  getCell,
-  getIndex,
-  cellFilled,
-  cellEmpty,
-  getCoords,
-  getWordLength,
 } from "../helpers/findCells.js";
 import Question from "./Question";
 
 export default function Questions({ questions, setDirection, starts, setQMap, dimensions, board }) {
-
-  // console.log("num of qs across", questions.across.length)
-  // console.log("num of qs down", questions.down.length)
 
   const createQuestion = (q, i, direction) => {
     return (
@@ -29,7 +17,7 @@ export default function Questions({ questions, setDirection, starts, setQMap, di
       />
     )
   }
-  
+
   const across = questions.across.sort((a, b) => a.num - b.num).map((q, i) => createQuestion(q, i, "across"));
   const down = questions.down.sort((a, b) => a.num - b.num).map((q, i) => createQuestion(q, i, "down"));
 
