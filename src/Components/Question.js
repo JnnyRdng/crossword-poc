@@ -5,7 +5,7 @@ import "./Question.css";
 
 export default function Question({ q, board, dimensions, setDirection, highlights, setHighlights }) {
 
-  const highlight = () => {
+  const highlightQuestion = () => {
     const newObj = {};
     for (let prop in highlights) {
       newObj[prop] = (prop === q.question.toString()) ? true : false;
@@ -13,8 +13,19 @@ export default function Question({ q, board, dimensions, setDirection, highlight
     setHighlights(newObj);
   }
 
+  const highlightCells = () => {
+    const cells = getWordLength(q.index, q.direction, board, dimensions);
+    for (let i = 0; i < (dimensions.width * dimensions.height); i++) {
+      try { document.querySelector(`#cell_${i}`).parentNode.classList.remove("highlighted") } catch (e) { }
+    }
+    cells.forEach(cell => {
+      document.querySelector(`#cell_${cell.index}`).parentNode.classList.add("highlighted");
+    });
+  }
+
   const handleClick = (event) => {
-    highlight();
+    highlightQuestion();
+    highlightCells();
     setDirection(q.direction);
     document.getElementById(`cell_${q.index}`).focus();
   }

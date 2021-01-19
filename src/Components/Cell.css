@@ -5,21 +5,16 @@
     box-sizing: border-box;
 }
 
+.cell:focus-within {
+    background-color: lightblue;
+}
+
 .black {
     background-color: #1C1E26;
 }
 
 .white {
-    background-color: #FAFAFA;
-}
-
-.cell-colour {
-    height: 50px;
-    width: 50px;
-    margin: 0px;
-    padding: 0px;
-    z-index: 1;
-    position: absolute;
+    /* background-color: #FAFAFA; */
 }
 
 .label {
@@ -52,8 +47,4 @@
     background-color: transparent;
     border: 0px solid transparent;
     outline: none;
-}
-
-.char:focus + .cell-colour {
-    background-color: lightgreen;
 }

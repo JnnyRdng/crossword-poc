@@ -6,6 +6,10 @@
   background-color: rgb(231, 231, 231);
 }
 
+.highlighted {
+  background-color: rgb(225, 241, 247);
+}
+
 .question {
   display: flex;
   flex-flow: row nowrap;

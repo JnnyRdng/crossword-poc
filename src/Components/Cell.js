@@ -1,12 +1,6 @@
 import "./Cell.css";
-
 import {
-  // moveCellDown,
-  // moveCellRight,
-  // getCell,
-  // getIndex,
-  // cellFilled,
-  // cellEmpty,
+
   getCoords,
 } from "../helpers/findCells.js";
 
@@ -32,17 +26,29 @@ export default function Cell({ number, value, index, handler, wordDir, direction
     setDirection(wordDir);
   }
 
+  const handleFocus = (event) => {
+    // event.currentTarget.focus();
+    // const val = event.target.value;
+    // event.target.value = "";
+    // event.target.value = val;
+    event.currentTarget.parentNode.classList.add("black");
+  }
+  const handleBlur = (event) => {
+    event.currentTarget.parentNode.classList.remove("black");
+  }
+
   return (
-    <div className={`${"cell"} ${style}`} key={`cell_outer_${index}`}>
+    <div className={`${"cell"} ${style} cell-colour`} key={`cell_outer_${index}`}>
       {value !== "." &&
         <>
-          <div className="cell-colour"></div>
           <div className="label">
             {number}
           </div>
           <input
             id={"cell_" + index}
             className="char"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             onClick={handleClick}
             onInput={handleInput}
             maxLength={2}
