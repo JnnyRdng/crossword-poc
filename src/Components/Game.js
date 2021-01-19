@@ -1,12 +1,11 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Game.css';
 
 import {
   moveCellDown,
   moveCellRight,
   getCell,
-  getIndex,
   cellFilled,
   cellEmpty
 } from "../helpers/findCells.js";
