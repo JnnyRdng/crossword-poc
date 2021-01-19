@@ -1,31 +1,7 @@
 .loading {
-  /* width: 200px; */
-  /* font-size: 5rem; */
   width: 300px;
   text-align: center;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   padding: 100px;
-}
-
-.loading:after {
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: bottom;
-  -webkit-animation: ellipsis steps(4, end) 900ms infinite;
-  animation: ellipsis steps(4, end) 900ms infinite;
-  content: "\2026";
-  /* ascii code for the ellipsis character */
-  width: 0px;
-}
-
-@keyframes ellipsis {
-  to {
-    width: 20px;
-  }
-}
-
-@-webkit-keyframes ellipsis {
-  to {
-    width: 20px;
-  }
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
