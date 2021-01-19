@@ -55,22 +55,19 @@ export function cellEmpty(val) {
 export const getWordLength = (index, dir, board, dimensions) => {
   let count = [];
   let current = { value: board[index], index: index };
-  const coords = getCoords(index, dimensions);
+  const { x, y } = getCoords(index, dimensions);
   let i = 1;
   while (current.value !== "." && current.value !== undefined) {
     count.push(current);
-    if (i > Math.max(dimensions.width, dimensions.height)) {
-      break;
-    }
     if (dir === "across") {
       current = {
-        value: getCell(coords.x + i, coords.y, board, dimensions),
-        index: getIndex(coords.x + i, coords.y, dimensions)
+        value: getCell(x + i, y, board, dimensions),
+        index: getIndex(x + i, y, dimensions)
       };
     } else {
       current = {
-        value: getCell(coords.x, coords.y + i, board, dimensions),
-        index: getIndex(coords.x, coords.y + i, dimensions)
+        value: getCell(x, y + i, board, dimensions),
+        index: getIndex(x, y + i, dimensions)
       };
     }
     i++;
