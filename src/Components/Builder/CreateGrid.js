@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { config } from "../../helpers/data";
+// import { config } from "../../helpers/data";
 import "./CreateGrid.css";
 // import Toast from "./Toast";
 
@@ -7,9 +7,9 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
 
   // const [popup, setPopup] = useState(true);
   const [warning, setWarning] = useState(undefined);
-  const [width, setWidth] = useState(9);
-  const [height, setHeight] = useState(9);
-  const [string, setString] = useState("hello...te.e.rhymelow.i.e.tl.dig.s.ro...in..i.grin.has.a.o..o...m.nasty.gems.o.of")
+  const [width, setWidth] = useState(13);
+  const [height, setHeight] = useState(13);
+  const [string, setString] = useState(".degenerate...e.l.i.e.o.h.cleancut.trot.f.c.k.r.a.b..twig.telling...a.c.a...o..ruleofthumb..e...s.s.p...pastime.edit..s.r.e.s.a.h.soda.tipsters.n.i.i.e.e.o...blackwidow.hello...te.e.rhymelow.i.e.tl.dig.s.ro...in..i.grin.has.a.o..o...m.nasty.gems.o.of")
   const [showQBuilder, setShowQBuilder] = useState(false);
 
   const questions = { across: [], down: [] };
@@ -17,7 +17,8 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
   useEffect(() => {
     setDimensions({ width: width, height: height });
     setGame(string);
-  }, [width, height, string])
+    textFilled();
+  }, [width, height, string, setDimensions, setGame])
 
 
   const writeQuestions = () => {
@@ -39,8 +40,12 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
 
   const updateBoard = (event) => {
     const board = event.target.value;
-    setGame(board);
+    setString(board);
     writeQuestions();
+    textFilled();
+  }
+
+  const textFilled = () => {
     if (textArea.value.length === width * height) {
       console.log("filled");
       textArea.classList.remove("incomplete");
@@ -51,8 +56,8 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions, qMap }
       textArea.classList.add("incomplete");
       setShowQBuilder(false);
     }
-    // console.log(textArea);
   }
+
   const updateDimensions = (event) => {
     const num = parseInt(event.target.value, 10);
     if (!isNaN(num) && num < 50 && num > 0) {
