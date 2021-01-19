@@ -11,7 +11,7 @@ export default function Cell({ number, value, index, handler, wordDir, direction
   const handleInput = (evt) => {
     evt.target.value = evt.target.value.slice(-1);
     const coords = getCoords(index, dimensions);
-    handler(coords.x, coords.y);
+    handler(coords.x, coords.y, evt.target.value === "");
   }
 
   const handleClick = () => {

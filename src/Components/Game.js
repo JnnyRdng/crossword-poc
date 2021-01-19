@@ -7,7 +7,9 @@ import {
   moveCellRight,
   getCell,
   cellFilled,
-  cellEmpty
+  cellEmpty,
+  moveCellLeft,
+  moveCellUp
 } from "../helpers/findCells.js";
 
 import Cell from "./Cell.js";
@@ -20,11 +22,19 @@ export default function Game({ questions, board, dimensions, demo }) {
   const gx = dimensions.width;
   const gy = dimensions.height;
 
-  const changeCell = (x, y) => {
+  const changeCell = (x, y, backspace = false) => {
     if (direction === "across") {
-      moveCellRight(x, y, board, dimensions);
+      if (backspace) {
+        moveCellLeft(x, y, board, dimensions);
+      } else {
+        moveCellRight(x, y, board, dimensions);
+      }
     } else {
-      moveCellDown(x, y, board, dimensions);
+      if (backspace) {
+        moveCellUp(x, y, board, dimensions);
+      } else {
+        moveCellDown(x, y, board, dimensions);
+      }
     }
   }
 
