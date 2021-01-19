@@ -29,6 +29,9 @@ describe("Helper functions do the right things", () => {
     expect(board).toStrictEqual("this.is.the.crossword.yay");
     expect(dimensions.width).toStrictEqual(5);
     expect(dimensions.height).toStrictEqual(5);
+    expect(board.length).toStrictEqual(dimensions.width * dimensions.height);
+    expect(x).toBeLessThan(dimensions.width);
+    expect(y).toBeLessThan(dimensions.height);
   });
 
   test("first cell is 't'", () => {
