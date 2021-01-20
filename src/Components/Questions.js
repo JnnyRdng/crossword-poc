@@ -3,6 +3,8 @@ import {
 } from "../helpers/findCells.js";
 import Question from "./Question";
 
+import "./Questions.css";
+
 export default function Questions({ questions, setDirection, dimensions, board }) {
 
   const createHighlights = () => {
@@ -37,13 +39,13 @@ export default function Questions({ questions, setDirection, dimensions, board }
   });
 
   return (
-    <div style={{ height: 50 * dimensions.height, width: 300, overflowX: "hidden", overflowY: "auto", padding: 10 }}>
-      <h3>Across</h3>
-      <div>
+    <div id="question-container" style={{ height: 50 * dimensions.height, width: 300 }}>
+      <div className="question-list">
+        <h3 className="question-header">Across</h3>
         {across}
       </div>
-      <h3>Down</h3>
-      <div>
+      <div className="question-list">
+        <h3 className="question-header">Down</h3>
         {down}
       </div>
     </div>
