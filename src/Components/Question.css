@@ -2,7 +2,7 @@
   background-color: lightblue;
 }
 
-.not-shown {
+.not-shown:hover {
   background-color: rgb(231, 231, 231);
 }
 
