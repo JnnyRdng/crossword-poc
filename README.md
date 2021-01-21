@@ -9,7 +9,7 @@
 > - - - then parse answer and show (4), (2-2), (2,2) etc as needed
 > - ~~Deleting in game needs to move back a square~~
 > - Move to next clue after word
-> - Highlight words and current cell on click (either ~~on clue~~ or cell)
+> - ~~Highlight words and current cell on click (either ~~on clue~~ or cell)~~
 > - - when ambiguous, across by default. click again for down / toggle
 > - ~~**Export** config, questions~~
 > - ~~**Import** config, questions~~
