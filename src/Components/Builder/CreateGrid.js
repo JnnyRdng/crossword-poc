@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
-// import { config } from "../../helpers/data";
 import "./CreateGrid.css";
-// import Toast from "./Toast";
 
 export default function CreateGrid({ game, setGame, setQs, setDimensions }) {
 
-  // const [popup, setPopup] = useState(true);
   const [warning, setWarning] = useState(undefined);
   const [width, setWidth] = useState(13);
   const [height, setHeight] = useState(13);
   const [string, setString] = useState(".degenerate...e.l.i.e.o.h.cleancut.trot.f.c.k.r.a.b..twig.telling...a.c.a...o..ruleofthumb..e...s.s.p...pastime.edit..s.r.e.s.a.h.soda.tipsters.n.i.i.e.e.o...blackwidow.hello...te.e.rhymelow.i.e.tl.dig.s.ro...in..i.grin.has.a.o..o...m.nasty.gems.o.of")
   const [showQBuilder, setShowQBuilder] = useState(false);
 
-  const questions = { across: [], down: [] };
 
   useEffect(() => {
     setDimensions({ width: width, height: height });
@@ -22,20 +18,7 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions }) {
 
 
   const writeQuestions = () => {
-    // for (let key in qMap) {
-    //   // console.log(qMap[key])
-    //   const mapElement = {
-    //     num: key,
-    //     question: "",
-    //   };
-    //   if (qMap[key].direction !== "both") {
-    //     questions[qMap[key].direction].push(mapElement);
-    //   } else {
-    //     questions.across.push(mapElement);
-    //     questions.down.push(mapElement);
-    //   }
-    // }
-    // setQs(questions);
+
   }
 
   const updateBoard = (event) => {
