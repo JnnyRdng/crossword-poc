@@ -49,6 +49,7 @@ export default function Cell({ number, value, index, handler, wordDir, direction
     } else {
       setDirection(wordDir);
     }
+    window.location = "#question_id_" + index;
     highlightCells();
   }
 

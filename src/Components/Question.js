@@ -35,6 +35,7 @@ export default function Question({ q, board, dimensions, setDirection, highlight
   return (
     <div
       onClick={handleClick}
+      id={`question_id_${q.index}`}
       className={`question ${highlights[q.question] ? "shown" : "not-shown"}`}
     >
       <p className="question-text question-number">{q.num}. </p>
