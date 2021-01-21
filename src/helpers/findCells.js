@@ -72,5 +72,23 @@ export const getWordLength = (index, dir, board, dimensions) => {
     }
     i++;
   }
+  i = -1;
+  count.shift();
+  current = { value: board[index], index: index };
+  while (current.value !== "." && current.value !== undefined) {
+    count.unshift(current);
+    if (dir === "across") {
+      current = {
+        value: getCell(x + i, y, board, dimensions),
+        index: getIndex(x + i, y, dimensions)
+      };
+    } else {
+      current = {
+        value: getCell(x, y + i, board, dimensions),
+        index: getIndex(x, y + i, dimensions)
+      };
+    }
+    i--;
+  }
   return count;
 }

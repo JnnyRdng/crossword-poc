@@ -128,6 +128,12 @@ describe("Helper functions do the right things", () => {
     const word = getWordLength(index, "across", board, dimensions);
     expect(word[1].value).toStrictEqual("r");
   });
+  test("word length gets whole word when not starting at beginning", () => {
+    const index = getIndex(0, 2, dimensions);
+    const word = getWordLength(index, "down", board, dimensions);
+    expect(word.length).toStrictEqual(5);
+    expect(word[3].value).toStrictEqual("s");
+  });
 
   test("moveCellRight focuses cell index 1 from 0,0", () => {
     render(<input id="cell_1" />);
