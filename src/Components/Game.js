@@ -46,9 +46,6 @@ export default function Game({ questions, board, dimensions, demo }) {
     let game = [];
     let index = 1;
 
-    // let newQMap = {};
-
-
     for (by = 0; by < gy; by++) {
       for (bx = 0; bx < gx; bx++) {
         const cell = getCell(bx, by, board, dimensions);
@@ -61,9 +58,9 @@ export default function Game({ questions, board, dimensions, demo }) {
         let wordDir = "";
         if ((cellEmpty(left) && cellEmpty(above)) && (cellFilled(right) && cellFilled(below))) {
           wordDir = "both";
-        } else if (cellEmpty(left) && cellFilled(right)) {
+        } else if ((cellEmpty(left) || cellFilled(left)) && (cellFilled(right) || cellEmpty(right))) {
           wordDir = "across";
-        } else if (cellEmpty(above) && cellFilled(below)) {
+        } else if ((cellEmpty(above) || cellFilled(above)) && (cellFilled(below) || cellEmpty(below))) {
           wordDir = "down";
         }
         if (
@@ -76,12 +73,6 @@ export default function Game({ questions, board, dimensions, demo }) {
 
           number = index;
           index++;
-          // newQMap[getIndex(bx, by, dimensions)] = {
-          //   number: number,
-          //   direction: wordDir,
-          //   style: "not-shown",
-          //   clicked: false,
-          // };
         }
 
         game.push(
@@ -96,6 +87,7 @@ export default function Game({ questions, board, dimensions, demo }) {
             handler={changeCell}
             dimensions={dimensions}
             demo={demo}
+            board={board}
           />
         );
       }
