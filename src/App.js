@@ -23,7 +23,7 @@ export default function App({ config, questions }) {
     } else {
       setDemo(false);
       // setGame(".");
-      // setQs({ across: [], down: [] });
+      setQs([]);
       // setDimensions({ width: 9, height: 9 });
     }
   }

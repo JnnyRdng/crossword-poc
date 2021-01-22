@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ClueList from "./ClueList";
 import "./CreateGrid.css";
 
 export default function CreateGrid({ game, setGame, setQs, setDimensions }) {
@@ -80,13 +81,6 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions }) {
       </div>
       <div className="input-text">
         <label htmlFor="game_grid">Crossword: </label> <br />
-        {/* <input
-          id="game_grid"
-          type="textarea"
-          onInput={updateBoard}
-          defaultValue={game}
-          placeholder="Type a crossword"
-        /> */}
         <textarea
           ref={ref => textArea = ref}
           id="game_grid"
@@ -101,8 +95,8 @@ export default function CreateGrid({ game, setGame, setQs, setDimensions }) {
       </div>
       <div>
         {showQBuilder && (
-          // <button onClick={writeQuestions}>Write questions</button>
           <>
+            <ClueList board={string} dimensions={{ width, height }} setQs={setQs} />
 
           </>
         )}
