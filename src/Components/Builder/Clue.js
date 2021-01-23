@@ -6,7 +6,7 @@ export default function Clue({ clue, board, arrayIndex, setQs, questions }) {
   const [question, setQuestion] = useState(clue.question);
 
   useEffect(() => {
-    const updated = JSON.parse(JSON.stringify(questions));
+    const updated = [...questions];
     updated[arrayIndex] = { ...clue, question };
     setQs(updated);
   }, [question])
